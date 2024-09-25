@@ -2,14 +2,14 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as libhttp;
 
-class CreateAlbumDetails extends StatefulWidget {
-  const CreateAlbumDetails({Key? key}) : super(key: key);
+class DetailsPage extends StatefulWidget { // Changed class name
+  const DetailsPage({Key? key}) : super(key: key);
 
   @override
-  _CreateAlbumDetailsState createState() => _CreateAlbumDetailsState();
+  _DetailsPageState createState() => _DetailsPageState(); // Updated state creation
 }
 
-class _CreateAlbumDetailsState extends State<CreateAlbumDetails> {
+class _DetailsPageState extends State<DetailsPage> { // Updated state class
   final TextEditingController IdController = TextEditingController();
   final TextEditingController UserIdController = TextEditingController();
   final TextEditingController titleController = TextEditingController();

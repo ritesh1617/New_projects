@@ -8,14 +8,14 @@ import 'package:api_project/model.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as libhttp;
 
-class FakeApi extends StatefulWidget {
-  const FakeApi({super.key});
+class Homescreen extends StatefulWidget { // Changed class name
+  const Homescreen({super.key});
 
   @override
-  State<FakeApi> createState() => _MyWidgetState();
+  State<Homescreen> createState() => _MyWidgetState(); // Updated state creation
 }
 
-class _MyWidgetState extends State<FakeApi> {
+class _MyWidgetState extends State<Homescreen> { // Updated state class
   final apiURL = "http://localhost:8000/albums";
 
   late List albumData;
@@ -44,8 +44,8 @@ class _MyWidgetState extends State<FakeApi> {
       if (response.statusCode == 200) {
         List<dynamic> JesonArray = jsonDecode(response.body);
         // dart album object -> convert to json object -> dart object
-        List<modelalbums> albumList = JesonArray.map(
-            (Jesonobject) => modelalbums.FromJsonObject(Jesonobject)).toList();
+        List< AlbumModel> albumList = JesonArray.map(
+            (Jesonobject) =>  AlbumModel.fromJsonObject(Jesonobject)).toList();
         setState(() {
           hashFailed = false;
           albumData = albumList;
@@ -103,7 +103,7 @@ class _MyWidgetState extends State<FakeApi> {
                         child: ListView.builder(
                           itemCount: albumData.length,
                           itemBuilder: (context, index) {
-                            final modelalbums album = albumData[index];
+                            final AlbumModel album = albumData[index];
                             Color backgroundColor = getRandomColor();
 
                             return Padding(
@@ -117,7 +117,7 @@ class _MyWidgetState extends State<FakeApi> {
                                 child: ListTile(
                                   title: Text(album.title),
                                   subtitle: Text(
-                                      "UserId: ${album.UserId},\n ID: ${album.id}"),
+                                      "UserId: ${album.userId},\n ID: ${album.id}"),
                                   leading: IconButton(
                                     onPressed: () {
                                       Navigator.push(
@@ -171,7 +171,7 @@ class _MyWidgetState extends State<FakeApi> {
           Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => CreateAlbumDetails(),
+                builder: (context) => DetailsPage(),
               ));
         },
         child: Icon(Icons.add),
